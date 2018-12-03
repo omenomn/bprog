@@ -1,11 +1,15 @@
 <template>
-  <nav id="sidebar">
+  <nav id="sidebar" class="">
 		<div class="sidebar-header">
+      <div id="dismiss" class="">
+        <font-awesome-icon 
+          icon="arrow-left"/>
+      </div>
 		  <h3>{{ lang.get('messages.users').capitalize() }}</h3>
 		</div>
-		<ul class="list-unstyled components">
+		<ul class="list-unstyled components text-white">
 		  <li v-for="(user, index) in users">
-		    <a @click.prevent="open(user.id)" href="#">{{ user.login }} <span v-if="user.unread_messages > 0" class="badge badge-warning">{{ user.unread_messages }}</span></a>
+		    <a @click.prevent="open(user.id)" href="#">{{ user.login }} <span v-if="user.unread_messages > 0" class="badge badge-warning ">{{ user.unread_messages }}</span></a>
 		  </li>
 		</ul>
   </nav>
@@ -24,7 +28,13 @@
     methods: {
     	open(id) {
     		console.log(id)
-    	}
+    	},
+    },
+    mounted() {      
+      $('#dismiss, .overlay').on('click', function () {
+          $('#sidebar').removeClass('active');
+          $('.overlay').removeClass('active');
+      });
     }
 	}
 </script>

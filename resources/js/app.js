@@ -8,6 +8,22 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faAlignLeft } from '@fortawesome/free-solid-svg-icons'
+import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faShareSquare } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faAlignLeft)
+library.add(faAlignJustify)
+library.add(faSignOutAlt)
+library.add(faShareSquare)
+library.add(faArrowLeft)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 import store from './store/index'
 
 import App from './App.vue';

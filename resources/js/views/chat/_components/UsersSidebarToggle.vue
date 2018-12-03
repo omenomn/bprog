@@ -2,8 +2,9 @@
   <button 
   	@click="toggle()"
   	type="button"
-  	class="btn btn-info">
-      <i class="fas fa-align-left"></i>
+  	class="btn btn-warning">
+      <font-awesome-icon 
+        icon="align-left"/>
       <span>Toggle Sidebar</span>
   </button>
 </template>
