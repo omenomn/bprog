@@ -1668,6 +1668,10 @@ delegates@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
 
+delve@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/delve/-/delve-0.3.2.tgz#1d41a7cb008c1d3719fa2c621973253417de6b8b"
+
 depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
@@ -2989,6 +2993,10 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+jquery@^1.11.2:
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
+
 jquery@^3.2:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
@@ -3101,6 +3109,24 @@ kind-of@^5.0.0:
 kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
+
+lang.js@^1.1.12:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/lang.js/-/lang.js-1.1.13.tgz#d2718e4807894fd8f8663cea90e3ce7ed0ff6190"
+
+lang@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/lang/-/lang-0.1.1.tgz#2324e17706ad464781092305106e6cf87fdfa319"
+  dependencies:
+    delve "^0.3.2"
+    jquery "^1.11.2"
+
+laravel-localization-loader@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/laravel-localization-loader/-/laravel-localization-loader-1.0.5.tgz#aef66e121ec0f92831ab6de3d7fb382f9c9b0593"
+  dependencies:
+    json-loader "^0.5.4"
+    php-array-loader "^1.0.0"
 
 laravel-mix@^2.0:
   version "2.1.14"
@@ -4055,6 +4081,22 @@ pbkdf2@^3.0.3:
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
+
+php-array-loader@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/php-array-loader/-/php-array-loader-1.0.1.tgz#78173cc8aadbda57b8491f5dffe144afb9eadd71"
+  dependencies:
+    php-array-parser "^1.0.0"
+
+php-array-parser@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/php-array-parser/-/php-array-parser-1.0.1.tgz#9da12683c3bebbe228a7e238c716435437631eaa"
+  dependencies:
+    php-parser "^2.0.3"
+
+php-parser@^2.0.3:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/php-parser/-/php-parser-2.2.0.tgz#67384f0a5933dbbef40beab0ab31d0b8c582ff88"
 
 pify@^2.0.0:
   version "2.3.0"
