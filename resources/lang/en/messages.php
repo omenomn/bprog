@@ -5,4 +5,5 @@ return [
 	'login_form' => 'login form',
 	'email' => 'email',
 	'password' => 'password',
+	'users' => 'users',
 ];

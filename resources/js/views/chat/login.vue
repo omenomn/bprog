@@ -45,9 +45,9 @@
 	</div>
 </template>
 <script>	
-  import Recaptcha from './../components/Recaptcha';
-  import { LocaleMixin } from './../mixin/locale.js';
-  import { ErrorsMixin } from './../mixin/errors.js';
+  import Recaptcha from './_components/Recaptcha';
+  import { LocaleMixin } from './../../mixin/locale.js';
+  import { ErrorsMixin } from './../../mixin/errors.js';
 
   export default {
     name: 'login',
