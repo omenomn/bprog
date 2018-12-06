@@ -10568,6 +10568,9 @@ a:focus {
 
 #sidebar ul.components {
   padding: 20px 0;
+  overflow-y: scroll;
+  height: calc(100vh - 77px);
+  margin-bottom: 0px;
 }
 
 #sidebar ul p {
@@ -10580,6 +10583,7 @@ a:focus {
   font-size: 1.1em;
   display: block;
   border-bottom: 1px solid #6c757d;
+  word-wrap: break-word;
 }
 
 #sidebar ul li:first-child a {
@@ -10706,11 +10710,14 @@ a.article:hover {
     Messages
 ----------------------------------------------------- */
 
+.messages-card .card-body {
+  height: calc(100vh - 172px);
+  overflow-y: scroll;
+}
+
 .messages-list-group {
   list-style: none;
   padding: 0px;
-  height: calc(100vh - 122px);
-  overflow-y: scroll;
   margin-bottom: 0px;
   width: 100%;
   background: #E6EAEA;

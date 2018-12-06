@@ -3139,15 +3139,17 @@ var _iconsCache = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return PENDING_TOGGLE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return PURGE_ERRORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_ERRORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return SET_AUTH; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return PURGE_AUTH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return PENDING_TOGGLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return PURGE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return SET_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return SET_AUTH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SET_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return PURGE_AUTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CHECK_AUTH; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LOGOUT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return LOGIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return LOGOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LOGIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return GET_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_USERS; });
 var PENDING_TOGGLE = 'pendingToggle';
 var PURGE_ERRORS = 'purgeErrors';
 var SET_ERRORS = 'setErrors';
@@ -3157,6 +3159,8 @@ var PURGE_AUTH = 'purgeAuth';
 var CHECK_AUTH = 'checkAuth';
 var LOGOUT = 'logout';
 var LOGIN = 'login';
+var GET_USERS = 'getUsers';
+var SET_USERS = 'setUsers';
 
 /***/ }),
 /* 5 */
@@ -56107,6 +56111,9 @@ var FontAwesomeLayersText = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lang_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lang_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__messages__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_module__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__types_js__ = __webpack_require__(4);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -56119,44 +56126,38 @@ var lang = new __WEBPACK_IMPORTED_MODULE_2_lang_js___default.a({ messages: __WEB
 
 
 
+
+
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
-	state: {
-		lang: lang,
-		usersOnline: [{
-			id: 1,
-			login: 'Dandaj',
-			unread_messages: 3,
-			last_message: 1544035351
-		}, {
-			id: 2,
-			login: 'Larry',
-			unread_messages: 0,
-			last_message: 1544035331
-		}, {
-			id: 3,
-			login: 'Gimlie',
-			unread_messages: 2,
-			last_message: 1544032331
-		}, {
-			id: 4,
-			login: 'Gimlie',
-			unread_messages: 2,
-			last_message: 1544035957
-		}]
-	},
-	getters: {
-		lang: function lang(state) {
-			return state.lang;
+		state: {
+				lang: lang,
+				usersOnline: []
 		},
-		usersOnline: function usersOnline(state) {
-			return state.usersOnline;
+		getters: {
+				lang: function lang(state) {
+						return state.lang;
+				},
+				users: function users(state) {
+						return state.usersOnline;
+				}
+		},
+		actions: _defineProperty({}, __WEBPACK_IMPORTED_MODULE_5__types_js__["b" /* GET_USERS */], function (context) {
+				axios.get('/api/users').then(function (_ref) {
+						var data = _ref.data;
+
+						context.commit(__WEBPACK_IMPORTED_MODULE_5__types_js__["k" /* SET_USERS */], data.users);
+				}).catch(function (_ref2) {
+						var response = _ref2.response;
+
+						context.commit(PURGE_AUTH);
+				});
+		}),
+		mutations: _defineProperty({}, __WEBPACK_IMPORTED_MODULE_5__types_js__["k" /* SET_USERS */], function (state, users) {
+				state.usersOnline = users;
+		}),
+		modules: {
+				auth: __WEBPACK_IMPORTED_MODULE_4__auth_module__["a" /* default */]
 		}
-	},
-	actions: {},
-	mutations: {},
-	modules: {
-		auth: __WEBPACK_IMPORTED_MODULE_4__auth_module__["a" /* default */]
-	}
 }));
 
 /***/ }),
@@ -56856,7 +56857,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* 50 */
 /***/ (function(module, exports) {
 
-module.exports = {"login":"login","login_form":"login form","email":"email","password":"password","users":"users","logout":"logout","message":"message","send":"send","name":"name"};
+module.exports = {"login":"login","login_form":"login form","email":"email","password":"password","users":"users","logout":"logout","message":"message","send":"send","name":"name","chat_with":"chat with"};
 
 /***/ }),
 /* 51 */
@@ -56895,28 +56896,28 @@ var getters = {
   }
 };
 
-var actions = (_actions = {}, _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["b" /* LOGIN */], function (context, credentials) {
+var actions = (_actions = {}, _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["c" /* LOGIN */], function (context, credentials) {
   return new Promise(function (resolve) {
-    context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["d" /* PENDING_TOGGLE */]);
-    context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["f" /* PURGE_ERRORS */]);
+    context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["e" /* PENDING_TOGGLE */]);
+    context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["g" /* PURGE_ERRORS */]);
 
     axios.post('/api/user/login', credentials).then(function (_ref) {
       var data = _ref.data;
 
-      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["g" /* SET_AUTH */], data);
+      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["h" /* SET_AUTH */], data);
       resolve();
     }).catch(function (_ref2) {
       var response = _ref2.response;
 
-      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["h" /* SET_ERRORS */], response.data.errors);
+      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["i" /* SET_ERRORS */], response.data.errors);
     }).then(function () {
       grecaptcha.reset();
-      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["d" /* PENDING_TOGGLE */]);
+      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["e" /* PENDING_TOGGLE */]);
     });
   });
-}), _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["c" /* LOGOUT */], function (context) {
+}), _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["d" /* LOGOUT */], function (context) {
   return new Promise(function (resolve) {
-    context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["e" /* PURGE_AUTH */]);
+    context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["f" /* PURGE_AUTH */]);
     resolve();
   });
 }), _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["a" /* CHECK_AUTH */], function (context) {
@@ -56925,36 +56926,36 @@ var actions = (_actions = {}, _defineProperty(_actions, __WEBPACK_IMPORTED_MODUL
     axios.get('/api/user').then(function (_ref3) {
       var data = _ref3.data;
 
-      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["i" /* SET_USER */], data);
+      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["j" /* SET_USER */], data);
     }).catch(function (_ref4) {
       var response = _ref4.response;
 
-      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["e" /* PURGE_AUTH */]);
+      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["f" /* PURGE_AUTH */]);
     });
   } else {
-    context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["e" /* PURGE_AUTH */]);
+    context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["f" /* PURGE_AUTH */]);
   }
 }), _actions);
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["d" /* PENDING_TOGGLE */], function (state) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["e" /* PENDING_TOGGLE */], function (state) {
   state.pending = !state.pending;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["h" /* SET_ERRORS */], function (state, error) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["i" /* SET_ERRORS */], function (state, error) {
   state.errors = error;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["g" /* SET_AUTH */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["h" /* SET_AUTH */], function (state, payload) {
   state.isAuthenticated = true;
   state.user = payload.user;
   state.errors = {};
   __WEBPACK_IMPORTED_MODULE_0__common_jwt_service__["a" /* default */].saveToken(payload.token);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["i" /* SET_USER */], function (state, user) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["j" /* SET_USER */], function (state, user) {
   state.isAuthenticated = true;
   state.user = user;
   state.errors = {};
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["e" /* PURGE_AUTH */], function (state) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["f" /* PURGE_AUTH */], function (state) {
   state.isAuthenticated = false;
   state.user = null;
   state.errors = {};
   __WEBPACK_IMPORTED_MODULE_0__common_jwt_service__["a" /* default */].destroyToken();
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["f" /* PURGE_ERRORS */], function (state) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["g" /* PURGE_ERRORS */], function (state) {
   state.errors = {};
 }), _mutations);
 
@@ -57608,7 +57609,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       var recaptcha = $('textarea[name="g-recaptcha-response"]').val();
-      this.$store.dispatch('auth/' + __WEBPACK_IMPORTED_MODULE_3__store_types_js__["b" /* LOGIN */], { name: name, recaptcha: recaptcha }).then(function () {
+      this.$store.dispatch('auth/' + __WEBPACK_IMPORTED_MODULE_3__store_types_js__["c" /* LOGIN */], { name: name, recaptcha: recaptcha }).then(function () {
         _this.$router.push({ name: 'dashboard' });
       });
     }
@@ -58003,7 +58004,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mixins: [__WEBPACK_IMPORTED_MODULE_3__mixin_locale_js__["a" /* LocaleMixin */]],
   methods: {
     logout: function logout() {
-      this.$store.dispatch('auth/' + __WEBPACK_IMPORTED_MODULE_4__store_types_js__["c" /* LOGOUT */]).then(this.$router.push({ name: 'login' }));
+      this.$store.dispatch('auth/' + __WEBPACK_IMPORTED_MODULE_4__store_types_js__["d" /* LOGOUT */]).then(this.$router.push({ name: 'login' }));
     }
   }
 });
@@ -58062,6 +58063,7 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin_locale_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_types_js__ = __webpack_require__(4);
 //
 //
 //
@@ -58078,6 +58080,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -58086,7 +58089,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_locale_js__["a" /* LocaleMixin */]],
   computed: {
     users: function users() {
-      return _.orderBy(this.$store.getters['usersOnline'], ['last_message'], ['desc']);
+      return _.orderBy(this.$store.getters['users'], ['last_message'], ['desc']);
     }
   },
   methods: {
@@ -58095,10 +58098,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
+    var _this = this;
+
     $('#dismiss, .overlay').on('click', function () {
       $('#sidebar').removeClass('active');
       $('.overlay').removeClass('active');
     });
+
+    this.$store.dispatch(__WEBPACK_IMPORTED_MODULE_1__store_types_js__["b" /* GET_USERS */]);
+
+    setInterval(function () {
+      new Promise(function (resolve) {
+        _this.$store.dispatch('auth/' + __WEBPACK_IMPORTED_MODULE_1__store_types_js__["a" /* CHECK_AUTH */]);
+        resolve();
+      }).then(function () {
+        if (_this.$store.getters['auth/isAuthenticated']) {
+          _this.$store.dispatch(__WEBPACK_IMPORTED_MODULE_1__store_types_js__["b" /* GET_USERS */]);
+        }
+      });
+    }, 3000);
   }
 });
 
@@ -58139,7 +58157,7 @@ var render = function() {
               }
             },
             [
-              _vm._v(_vm._s(user.login) + " "),
+              _vm._v(_vm._s(user.name) + " "),
               user.unread_messages > 0
                 ? _c("span", { staticClass: "badge badge-warning " }, [
                     _vm._v(_vm._s(user.unread_messages))
@@ -58326,6 +58344,14 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin_locale_js__ = __webpack_require__(6);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -58339,8 +58365,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-	name: 'messages'
+		name: 'messages',
+		mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_locale_js__["a" /* LocaleMixin */]]
 });
 
 /***/ }),
@@ -58351,59 +58380,87 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card messages-card" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._v(
+        "\n    " +
+          _vm._s(_vm.lang.get("messages.chat_with").capitalize()) +
+          " Johnson\n  "
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "messages-list-group" }, [
-      _c("li", { staticClass: "messages-list-group-item sent" }, [
-        _c("p", [
-          _vm._v("What are your choices when someone puts a gun to your head?")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "messages-list-group-item replies" }, [
-        _c("p", [
-          _vm._v("What are your choices when someone puts a gun to your head?")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "messages-list-group-item sent" }, [
-        _c("p", [
-          _vm._v("What are your choices when someone puts a gun to your head?")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "messages-list-group-item replies" }, [
-        _c("p", [
-          _vm._v("What are your choices when someone puts a gun to your head?")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "messages-list-group-item sent" }, [
-        _c("p", [
-          _vm._v("What are your choices when someone puts a gun to your head?")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "messages-list-group-item replies" }, [
-        _c("p", [
-          _vm._v("What are your choices when someone puts a gun to your head?")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "messages-list-group-item sent" }, [
-        _c("p", [
-          _vm._v("What are your choices when someone puts a gun to your head?")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "messages-list-group-item replies" }, [
-        _c("p", [
-          _vm._v("What are your choices when someone puts a gun to your head?")
+    return _c("div", { staticClass: "card-body" }, [
+      _c("ul", { staticClass: "messages-list-group" }, [
+        _c("li", { staticClass: "messages-list-group-item sent" }, [
+          _c("p", [
+            _vm._v(
+              "What are your choices when someone puts a gun to your head?"
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "messages-list-group-item replies" }, [
+          _c("p", [
+            _vm._v(
+              "What are your choices when someone puts a gun to your head?"
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "messages-list-group-item sent" }, [
+          _c("p", [
+            _vm._v(
+              "What are your choices when someone puts a gun to your head?"
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "messages-list-group-item replies" }, [
+          _c("p", [
+            _vm._v(
+              "What are your choices when someone puts a gun to your head?"
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "messages-list-group-item sent" }, [
+          _c("p", [
+            _vm._v(
+              "What are your choices when someone puts a gun to your head?"
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "messages-list-group-item replies" }, [
+          _c("p", [
+            _vm._v(
+              "What are your choices when someone puts a gun to your head?"
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "messages-list-group-item sent" }, [
+          _c("p", [
+            _vm._v(
+              "What are your choices when someone puts a gun to your head?"
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "messages-list-group-item replies" }, [
+          _c("p", [
+            _vm._v(
+              "What are your choices when someone puts a gun to your head?"
+            )
+          ])
         ])
       ])
     ])

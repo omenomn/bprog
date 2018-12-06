@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     public function login(LoginRequest $request) 
     {
-        $user = User::create([
+        $user = User::firstOrCreate([
         	'name' => $request->name,
         ]);
 

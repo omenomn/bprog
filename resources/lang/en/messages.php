@@ -10,4 +10,5 @@ return [
 	'message' => 'message',
 	'send' => 'send',
 	'name' => 'name',
+	'chat_with' => 'chat with'
 ];

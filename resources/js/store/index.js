@@ -10,47 +10,39 @@ const lang = new Lang({ messages })
 
 import auth from './auth.module'
 
+import {
+  GET_USERS,
+  SET_USERS,
+} from './types.js'
+
 export default new Vuex.Store({
 	state: {
 		lang: lang,
-		usersOnline: [
-			{
-				id: 1,
-				login: 'Dandaj',
-				unread_messages: 3,
-				last_message: 1544035351,
-			},
-			{
-				id: 2,
-				login: 'Larry',
-				unread_messages: 0,
-				last_message: 1544035331,
-			},
-			{
-				id: 3,
-				login: 'Gimlie',
-				unread_messages: 2,
-				last_message: 1544032331,
-			},
-			{
-				id: 4,
-				login: 'Gimlie',
-				unread_messages: 2,
-				last_message: 1544035957,
-			},
-		],
+		usersOnline: [],
 	},
 	getters: {
 	  lang (state) {
 	    return state.lang
 	  }, 
-	  usersOnline (state) {
+	  users (state) {
 	    return state.usersOnline
 	  }, 
 	},
 	actions: {
+	  [GET_USERS] (context) {
+      axios.get('/api/users')
+        .then(({data}) => {
+      		context.commit(SET_USERS, data.users)
+        })
+        .catch(({response}) => {
+          context.commit(PURGE_AUTH)
+        })
+	  }
 	},
 	mutations: {
+	  [SET_USERS] (state, users) {
+	    state.usersOnline = users
+	  },
 	},
   modules: {
 		auth,
