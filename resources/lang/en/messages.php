@@ -13,4 +13,6 @@ return [
 	'chat_with' => 'chat with',
 	'select_interlocutor' => 'Select interlocutor',
 	'access_denied' => 'access denied',
+	'page_not_found' => 'page not found',
+	'message_sent' => 'message sent',
 ];
