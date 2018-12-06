@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\API\Auth;
+namespace App\Http\Requests\API\Messages;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\API\BaseStoreRequest;
 
-class LoginRequest extends FormRequest
+class StoreRequest extends BaseStoreRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            // /'recaptcha' => 'required|captcha',
+            'message' => 'required|string|max:255',
         ];
     }
 }

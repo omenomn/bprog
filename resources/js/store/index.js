@@ -9,6 +9,7 @@ import messages from './../messages'
 const lang = new Lang({ messages })
 
 import auth from './auth.module'
+import conversation from './conversation.module'
 
 import {
   GET_USERS,
@@ -35,7 +36,7 @@ export default new Vuex.Store({
       		context.commit(SET_USERS, data.users)
         })
         .catch(({response}) => {
-          context.commit(PURGE_AUTH)
+        	console.log(response)
         })
 	  }
 	},
@@ -46,5 +47,6 @@ export default new Vuex.Store({
 	},
   modules: {
 		auth,
+		conversation,
   }
 })

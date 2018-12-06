@@ -26,6 +26,13 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+
+        Route::bind('interlocutor', function ($id) {
+            return respnse()->json([
+                'msg' => trans('messages.page_not_found'),
+            ], 404)l
+        });
     }
 
     /**

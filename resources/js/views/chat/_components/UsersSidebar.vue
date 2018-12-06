@@ -9,7 +9,7 @@
 		</div>
 		<ul class="list-unstyled components text-white">
 		  <li v-for="(user, index) in users">
-		    <a @click.prevent="open(user.id)" href="#">{{ user.name }} <span v-if="user.unread_messages > 0" class="badge badge-warning ">{{ user.unread_messages }}</span></a>
+		    <a @click.prevent="open(user)" href="#">{{ user.name }} <span v-if="user.unread_messages > 0" class="badge badge-warning ">{{ user.unread_messages }}</span></a>
 		  </li>
 		</ul>
   </nav>
@@ -19,6 +19,7 @@
   import {
     GET_USERS,
     CHECK_AUTH,
+    GET_INTERLOCUTOR,
   } from './../../../store/types.js'
 
 	export default {
@@ -30,8 +31,8 @@
     	}
     },
     methods: {
-    	open(id) {
-    		console.log(id)
+    	open(interlocutor) {
+        this.$store.dispatch('conversation/' + GET_INTERLOCUTOR, interlocutor)
     	},
     },
     mounted() {      

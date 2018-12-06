@@ -17,7 +17,7 @@ class User extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'unread_messages' => 2,
+            'unread_messages' => $this->unread_messages,
             'last_message' => 1544035957,
         ];
     }

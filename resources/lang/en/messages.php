@@ -10,5 +10,7 @@ return [
 	'message' => 'message',
 	'send' => 'send',
 	'name' => 'name',
-	'chat_with' => 'chat with'
+	'chat_with' => 'chat with',
+	'select_interlocutor' => 'Select interlocutor',
+	'access_denied' => 'access denied',
 ];

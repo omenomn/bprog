@@ -16,13 +16,18 @@
       </nav>
       <div class="row mb-0">
         <div class="col-md-12 pl-0 pr-0">
-          <messages></messages>  
+          <messages 
+            :interlocutor="interlocutor"></messages>  
         </div>  
       </div>
-      <div class="row mb-0">
+      <div 
+        v-if="interlocutor"
+        class="row mb-0">
         <div class="col-md-12 pl-0 pr-0">
           <div class="input-group mb-0">
             <input 
+              v-on:keyup.enter="send(message)"
+              v-model="message"
               class="form-control form-control-lg message-input" 
               type="text" 
               :placeholder="lang.get('messages.message').capitalize()">  
@@ -30,7 +35,7 @@
               <button 
                 class="btn btn-outline-secondary" 
                 type="button" 
-                id="button-addon2">
+                @click="send(message)">
                 <font-awesome-icon 
                   icon="share-square"/>
               </button>
@@ -48,6 +53,7 @@
   import { LocaleMixin } from './../../mixin/locale.js';
   import {
     LOGOUT,
+    SEND_MESSAGE,
   } from './../../store/types.js'
 
 	export default {
@@ -57,13 +63,28 @@
     	Messages,
       UsersSidebarToggle,
     },
+    data() {
+      return {
+        message: null,
+      }
+    },
     mixins: [LocaleMixin],
+    computed: {
+      interlocutor() {
+        return this.$store.getters['conversation/interlocutor']
+      },
+    },
     methods: {
       logout() {
         this.$store.dispatch('auth/' + LOGOUT).then(
           this.$router.push({name: 'login'})
         )
       },
+      send(message) {
+        this.$store.dispatch('conversation/' + SEND_MESSAGE, message).then(() => {
+          this.message = null
+        })       
+      }
     },
 	}
 </script>
