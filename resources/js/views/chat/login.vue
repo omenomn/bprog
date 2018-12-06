@@ -6,19 +6,19 @@
         <div class="row">
           <div class="col-md-12">
           	<form
-          		v-on:submit.prevent="login(email, password)">
+          		v-on:submit.prevent="login(name)">
               <div class="form-group">
-              	<label for="email">{{ lang.get('messages.email').capitalize() }}</label> 
+              	<label for="name">{{ lang.get('messages.name').capitalize() }}</label> 
               	<input 
               		type="text" 
-                  name="email"
-                  v-model="email"
-              		placeholder="email" 
+                  name="name"
+                  v-model="name"
+                  :placeholder="lang.get('messages.name').capitalize()" 
               		class="form-control">           
                 <div 
-                  v-if="getErrorMessage('email')"
+                  v-if="getErrorMessage('name')"
                   class="alert alert-danger mt-1 p-1" role="alert">
-                  {{ getErrorMessage('email') }}
+                  {{ getErrorMessage('name') }}
                 </div>
               </div>
               <div class="form-group">
@@ -45,9 +45,13 @@
 	</div>
 </template>
 <script>	
+
   import Recaptcha from './_components/Recaptcha';
   import { LocaleMixin } from './../../mixin/locale.js';
   import { ErrorsMixin } from './../../mixin/errors.js';
+  import {
+    LOGIN,
+  } from './../../store/types.js'
 
   export default {
     name: 'login',
@@ -57,8 +61,7 @@
     },
     data: function() {
       return {
-        email: null,
-        password: null,
+        name: null,
       }
     },
     computed: {
@@ -70,8 +73,14 @@
       },
     },
     methods: {
-      login: function(email, password) {
-      }
+      login: function(name) {
+        var recaptcha = $('textarea[name="g-recaptcha-response"]').val()
+        this.$store
+          .dispatch('auth/' + LOGIN, { name, recaptcha })
+          .then(() => { 
+            this.$router.push({name: 'dashboard'})
+          })
+      },
     },
     mounted() {
     }

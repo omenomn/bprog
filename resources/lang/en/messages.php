@@ -9,4 +9,5 @@ return [
 	'logout' => 'logout',
 	'message' => 'message',
 	'send' => 'send',
+	'name' => 'name',
 ];

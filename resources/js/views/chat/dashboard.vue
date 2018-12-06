@@ -5,7 +5,9 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <users-sidebar-toggle></users-sidebar-toggle>
-          <button class="btn btn-danger">
+          <button 
+            @click="logout()"
+            class="btn btn-danger">
             <font-awesome-icon 
               icon="sign-out-alt"/>
             {{ lang.get('messages.logout').capitalize() }}
@@ -44,6 +46,9 @@
   import UsersSidebarToggle from './_components/UsersSidebarToggle';
   import Messages from './_components/Messages';
   import { LocaleMixin } from './../../mixin/locale.js';
+  import {
+    LOGOUT,
+  } from './../../store/types.js'
 
 	export default {
     name: 'dashboard',		
@@ -53,5 +58,12 @@
       UsersSidebarToggle,
     },
     mixins: [LocaleMixin],
+    methods: {
+      logout() {
+        this.$store.dispatch('auth/' + LOGOUT).then(
+          this.$router.push({name: 'login'})
+        )
+      },
+    },
 	}
 </script>

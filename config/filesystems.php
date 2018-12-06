@@ -64,6 +64,12 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'openssl_key_pair' => [
+            'driver' => 'local',
+            'root'   => storage_path('openssl_key_pair'),
+            'visibility' => 'public',
+        ],
+
     ],
 
 ];
