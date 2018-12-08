@@ -83,7 +83,7 @@
       },
       send(message) {
         this.$store.dispatch('conversation/' + SEND_MESSAGE, message).then(() => {
-          this.message = null
+          //this.message = null
         })       
       }
     },
