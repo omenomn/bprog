@@ -20,7 +20,6 @@
             :interlocutor="interlocutor"></messages>  
         </div>  
       </div>
-          <div class="input-group mb-0">
             <input 
               v-on:keyup.enter="send(message)"
               v-model="message"
@@ -36,7 +35,6 @@
                   icon="share-square"/>
               </button>
             </div>
-          </div>
     </div>
   </div>
 </template>
