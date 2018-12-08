@@ -58606,7 +58606,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -58638,8 +58637,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$store.dispatch('auth/' + __WEBPACK_IMPORTED_MODULE_4__store_types_js__["e" /* LOGOUT */]).then(this.$router.push({ name: 'login' }));
     },
     send: function send(message) {
+      var _this = this;
+
       this.$store.dispatch('conversation/' + __WEBPACK_IMPORTED_MODULE_4__store_types_js__["k" /* SEND_MESSAGE */], message).then(function () {
-        //this.message = null
+        _this.message = null;
       });
     }
   },
@@ -59168,20 +59169,11 @@ var render = function() {
               _c("div", { staticClass: "col-md-12 pl-0 pr-0" }, [
                 _c("div", { staticClass: "input-group mb-0" }, [
                   _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.message,
-                        expression: "message"
-                      }
-                    ],
                     staticClass: "form-control form-control-lg message-input",
                     attrs: {
                       type: "text",
                       placeholder: _vm.lang.get("messages.message").capitalize()
                     },
-                    domProps: { value: _vm.message },
                     on: {
                       keyup: function($event) {
                         if (
@@ -59197,12 +59189,6 @@ var render = function() {
                           return null
                         }
                         _vm.send(_vm.message)
-                      },
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.message = $event.target.value
                       }
                     }
                   }),
