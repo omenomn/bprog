@@ -24,7 +24,6 @@
         class="row mb-0">
         <div class="col-md-12 pl-0 pr-0">
           <div 
-            v-if="interlocutor"
             class="input-group mb-0">
             <input 
               v-on:keyup.enter="send(message)"
