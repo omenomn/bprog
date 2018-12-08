@@ -31,15 +31,6 @@
               v-model="message"
               :placeholder="lang.get('messages.message').capitalize()"
               class="form-control form-control-lg message-input" >  
-            <div class="input-group-append">
-              <button 
-                class="btn btn-outline-secondary" 
-                type="button" 
-                @click="send(message)">
-                <font-awesome-icon 
-                  icon="share-square"/>
-              </button>
-            </div>
           </div>
         </div>
       </div>
