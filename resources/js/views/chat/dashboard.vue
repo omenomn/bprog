@@ -28,10 +28,9 @@
             <input 
               type="text" 
               name="message"
-              v-on:keyup.enter="send(message)"
               v-model="message"
-              class="form-control form-control-lg message-input" 
-              :placeholder="lang.get('messages.message').capitalize()">  
+              :placeholder="lang.get('messages.message').capitalize()"
+              class="form-control form-control-lg message-input" >  
             <div class="input-group-append">
               <button 
                 class="btn btn-outline-secondary" 
@@ -65,7 +64,7 @@
     	Messages,
       UsersSidebarToggle,
     },
-    data() {
+    data: function() {
       return {
         message: null,
       }
