@@ -25,7 +25,7 @@ class LoginRequest extends BaseStoreRequest
     {
         return [
             'name' => 'required|string|max:255|min:1',
-            //'recaptcha' => 'required|captcha',
+            'recaptcha' => 'required|captcha',
         ];
     }
 }
