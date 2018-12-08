@@ -15,6 +15,7 @@ import {
   GET_USERS,
   SET_USERS,
   ONLINE,
+  LOGOUT,
 } from './types.js'
 
 export default new Vuex.Store({
@@ -32,13 +33,16 @@ export default new Vuex.Store({
 	  }, 
 	},
 	actions: {
-	  [GET_USERS] (context) {
+	  [GET_USERS] ({ commit, state, getters, rootGetters, dispatch  }) {
       axios.get('/api/users-with-messages')
         .then(({data}) => {
-      		context.commit(SET_USERS, data.users)
+      		commit(SET_USERS, data.users)
         })
         .catch(({response}) => {
         	console.log(response)
+        	if (response.status == 403) {
+        		dispatch('auth/' + LOGOUT)
+        	}
         })
 	  },
 	  [ONLINE] (context) {
