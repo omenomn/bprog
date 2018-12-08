@@ -2,6 +2,7 @@
   <div class="wrapper">
   	<users-sidebar></users-sidebar>
     <div class="container-fluid">      
+          <users-sidebar-toggle></users-sidebar-toggle>
       <div 
         v-if="interlocutor"
         class="row mb-0">
