@@ -40,6 +40,10 @@
     methods: {
     	open(interlocutor) {
         this.$store.dispatch('conversation/' + GET_INTERLOCUTOR, interlocutor.id)
+
+        if ($(window).width() <= 600) {
+          $('#sidebar').removeClass('active');          
+        }
     	},
     },
     mounted() {      

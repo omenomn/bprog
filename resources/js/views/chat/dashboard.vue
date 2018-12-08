@@ -1,49 +1,10 @@
 <template>
   <div class="wrapper">
-  	<users-sidebar></users-sidebar>
-    <div class="container-fluid">      
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-          <users-sidebar-toggle></users-sidebar-toggle>
-          <button 
-            @click="logout()"
-            class="btn btn-danger">
-            <font-awesome-icon 
-              icon="sign-out-alt"/>
-            {{ lang.get('messages.logout').capitalize() }}
-          </button>
-        </div>
-      </nav>
-      <div class="row mb-0">
-        <div class="col-md-12 pl-0 pr-0">
-          <messages 
-            :interlocutor="interlocutor"></messages>  
-        </div>  
-      </div>
-      <div 
-        v-if="interlocutor"
-        class="row mb-0">
-        <div class="col-md-12 pl-0 pr-0">
-          <div class="input-group mb-0">
             <input 
               v-on:keyup.enter="send(message)"
               v-model="message"
               class="form-control form-control-lg message-input" 
-              type="text" 
-              :placeholder="lang.get('messages.message').capitalize()">  
-            <div class="input-group-append">
-              <button 
-                class="btn btn-outline-secondary" 
-                type="button" 
-                @click="send(message)">
-                <font-awesome-icon 
-                  icon="share-square"/>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              type="text">
   </div>
 </template>
 <script>
