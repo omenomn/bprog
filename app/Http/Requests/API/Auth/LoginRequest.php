@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\API\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\API\BaseStoreRequest;
 
-class LoginRequest extends FormRequest
+class LoginRequest extends BaseStoreRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +24,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            // /'recaptcha' => 'required|captcha',
+            'name' => 'required|string|max:255|min:1',
+            'recaptcha' => 'required|captcha',
         ];
     }
 }
