@@ -20,7 +20,10 @@
             :interlocutor="interlocutor"></messages>  
         </div>  
       </div>
-          <div class="input-group mb-0">
+          <div 
+
+            v-if="interlocutor"
+            class="input-group mb-0">
             <input 
               v-on:keyup.enter="send(message)"
               v-model="message"
