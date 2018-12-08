@@ -14,6 +14,12 @@
           </button>
         </div>
       </nav>
+      <div class="row mb-0">
+        <div class="col-md-12 pl-0 pr-0">
+          <messages 
+            :interlocutor="interlocutor"></messages>  
+        </div>  
+      </div>
           <div class="input-group mb-0">
             <input 
               v-on:keyup.enter="send(message)"
