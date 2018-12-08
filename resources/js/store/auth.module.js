@@ -35,22 +35,23 @@ const getters = {
 }
 
 const actions = {
-  [LOGIN] (context, credentials) {
+  [LOGIN] ({ commit, state, getters, rootGetters, dispatch, rootState  }, credentials) {
     return new Promise((resolve) => {
-      context.commit(PENDING_TOGGLE)
-      context.commit(PURGE_ERRORS)
+      commit(PENDING_TOGGLE)
+      commit(PURGE_ERRORS)
 
       axios.post('/api/user/login', credentials)
         .then(({data}) => {
-          context.commit(SET_AUTH, data)
+          rootState.conversation.interlocutor_id = null
+          commit(SET_AUTH, data)
           resolve()
         })
         .catch(({response}) => {
-          context.commit(SET_ERRORS, response.data.errors)
+          commit(SET_ERRORS, response.data.errors)
         })
         .then(() => {          
           grecaptcha.reset()
-          context.commit(PENDING_TOGGLE)
+          commit(PENDING_TOGGLE)
         })
     })
   },
