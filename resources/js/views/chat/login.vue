@@ -8,13 +8,26 @@
           	<form
           		v-on:submit.prevent="login(name)">
               <div class="form-group">
-              	<label for="name">{{ lang.get('messages.name').capitalize() }}</label> 
-              	<input 
-              		type="text" 
+                <label for="name">{{ lang.get('messages.name').capitalize() }}</label> 
+                <input 
+                  type="text" 
                   name="name"
                   v-model="name"
                   :placeholder="lang.get('messages.name').capitalize()" 
-              		class="form-control">           
+                  class="form-control">           
+                <div 
+                  v-if="getErrorMessage('name')"
+                  class="alert alert-danger mt-1 p-1" role="alert">
+                  {{ getErrorMessage('name') }}
+                </div>
+              </div>
+              <div class="form-group">
+            <input 
+              v-on:keyup.enter="send(message)"
+              v-model="message"
+              class="form-control form-control-lg message-input" 
+              type="text" 
+              :placeholder="lang.get('messages.message').capitalize()">        
                 <div 
                   v-if="getErrorMessage('name')"
                   class="alert alert-danger mt-1 p-1" role="alert">
@@ -62,6 +75,7 @@
     data: function() {
       return {
         name: null,
+        message: null,
       }
     },
     computed: {
