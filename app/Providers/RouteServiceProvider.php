@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Models\User;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,24 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+
+        Route::bind('interlocutor', function ($id = null) {
+
+            if (!$id) {
+                return null;
+            }
+
+            $interlocutor = User::find($id);
+
+            if ($interlocutor) {
+                return $interlocutor;
+            }
+
+            return respnse()->json([
+                'msg' => trans('messages.page_not_found'),
+            ], 404);
+        });
     }
 
     /**
@@ -67,7 +86,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
              ->middleware('api')
-             ->namespace($this->namespace)
+             ->namespace($this->namespace . '\API')
              ->group(base_path('routes/api.php'));
     }
 }

@@ -1,33 +1,88 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
+import Vue from 'vue';
+import Vuex from 'vuex'
 
-window.Vue = require('vue');
+Vue.use(Vuex)
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import VueRouter from 'vue-router';
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.use(VueRouter);
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
+window.toastr = require('toastr');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+toastr.options.closeButton = true;
+toastr.options.closeDuration = 10;
 
-const app = new Vue({
-    el: '#app'
-});
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faAlignLeft } from '@fortawesome/free-solid-svg-icons'
+import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faShareSquare } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faAlignLeft)
+library.add(faAlignJustify)
+library.add(faSignOutAlt)
+library.add(faShareSquare)
+library.add(faArrowLeft)
+library.add(faSpinner)
+library.add(faCircle)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+import store from './store/index'
+
+import App from './App.vue';
+import Login from './views/chat/login.vue';
+import Dashboard from './views/chat/dashboard.vue';
+
+import {
+  CHECK_AUTH,
+} from './store/types.js'
+
+const routes = [
+	{
+	  name: 'login',
+	  path: '/login', 
+	  component: Login,
+	  beforeEnter: function (to, from, next) {
+	  	if (!store.getters['auth/isAuthenticated']) {
+	  		next()
+	  	} else {
+	  		next('/')
+	  	}
+		}
+	},
+	{
+	  name: 'dashboard',
+	  path: '/', 
+	  component: Dashboard,
+	  beforeEnter: function (to, from, next) {
+	  	if (store.getters['auth/isAuthenticated']) {
+	  		next()
+	  	} else {
+	  		next('/login')
+	  	}
+		}
+	},
+]
+const router = new VueRouter({ mode: 'history', routes: routes});
+
+router.beforeEach((to, from, next) =>
+  Promise.all([store.dispatch('auth/' + CHECK_AUTH)]).then(next)
+);
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+new Vue({
+  el: '#app',
+  router,
+  store,
+  template: '<App/>',
+  components: { App }
+})

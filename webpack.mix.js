@@ -1,5 +1,17 @@
 const mix = require('laravel-mix');
 
+mix.webpackConfig({
+  module: {
+    rules: [
+      {
+        // Matches all PHP or JSON files in `resources/lang` directory.
+        test: /resources(\\|\/)lang.+\.(php|json)$/,
+        loader: 'laravel-localization-loader',
+      }
+    ]
+  }
+});
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
