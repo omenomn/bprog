@@ -1,13 +1,30 @@
 <template>
   <div class="wrapper">
   	<users-sidebar></users-sidebar>
-    <div class="container-fluid">    
+    <div class="container-fluid">      
+          <users-sidebar-toggle></users-sidebar-toggle>
+      <div 
+        class="row mb-0">
+        <div class="col-md-12 pl-0 pr-0">
+          <div class="input-group mb-0">
             <input 
               v-on:keyup.enter="send(message)"
               v-model="message"
               class="form-control form-control-lg message-input" 
               type="text" 
               :placeholder="lang.get('messages.message').capitalize()">  
+            <div class="input-group-append">
+              <button 
+                class="btn btn-outline-secondary" 
+                type="button" 
+                @click="send(message)">
+                <font-awesome-icon 
+                  icon="share-square"/>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
