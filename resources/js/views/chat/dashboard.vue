@@ -21,8 +21,7 @@
         </div>  
       </div>
           <div 
-
-            v-if="interlocutor"
+            v-show="interlocutor"
             class="input-group mb-0">
             <input 
               v-on:keyup.enter="send(message)"
