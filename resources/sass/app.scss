@@ -9,6 +9,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+@import "~toastr/toastr.scss";
 
 /*
     DEMO STYLE
@@ -244,6 +245,9 @@ a.article:hover {
 .messages-card .card-body {
   height: calc(100vh - 172px);  
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+  background: #E6EAEA;  
 }
 
 .messages-list-group {
@@ -251,7 +255,6 @@ a.article:hover {
   padding: 0px;
   margin-bottom:0px;
   width: 100%;
-  background: #E6EAEA;
 }
 
 .messages-list-group-item {
@@ -294,4 +297,12 @@ a.article:hover {
 
 .bg-dark {
     background-color: #2c3e50 !important;
+}
+
+.toast {
+  top: 87px;
+}
+
+.text-green {
+  color: #76ff03;
 }

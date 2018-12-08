@@ -29,7 +29,11 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
 
-        Route::bind('interlocutor', function ($id) {
+        Route::bind('interlocutor', function ($id = null) {
+
+            if (!$id) {
+                return null;
+            }
 
             $interlocutor = User::find($id);
 

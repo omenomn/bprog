@@ -1,5 +1,5 @@
 <template>
-	<div class="col-md-6 offset-md-3">
+	<div class="col-md-4 offset-md-4">
 		<div class="card text-white bg-dark mt-5 mb-5">
 	    <div class="card-body">
         <h3 class="card-title">{{ lang.get('messages.login_form').capitalize() }}</h3>

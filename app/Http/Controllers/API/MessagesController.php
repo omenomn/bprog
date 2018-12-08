@@ -24,16 +24,18 @@ class MessagesController extends Controller
     	]);
     }
 
-    public function list($interlocutor) 
+    public function read($interlocutor)
     {
-        $recipient = Auth::user();
-        $messages = Message::where('recipient_id', $recipient->id)
+        $user = Auth::user();
+        $user->receivedMessages()
             ->where('sender_id', $interlocutor->id)
-            ->orWhere('recipient_id', $interlocutor->id)
-            ->where('sender_id', $recipient->id)
-            ->orderBy('created_at', 'asc')
-            ->get();
+            ->where('is_read', false)
+            ->update([
+                'is_read' => true,
+            ]);
 
-        return new MessageCollection($messages);
+        return response()->json([
+            'msg' => trans('messages.success')
+        ]);
     }
 }

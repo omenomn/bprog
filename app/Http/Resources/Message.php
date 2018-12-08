@@ -16,6 +16,7 @@ class Message extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'message' => $this->message,
             'css_class' => (Auth::user()->id == $this->sender_id) ? 'sent' : 'replies',
             'is_read' => $this->is_read,

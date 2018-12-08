@@ -9,7 +9,11 @@
 		</div>
 		<ul class="list-unstyled components text-white">
 		  <li v-for="(user, index) in users">
-		    <a @click.prevent="open(user)" href="#">{{ user.name }} <span v-if="user.unread_messages > 0" class="badge badge-warning ">{{ user.unread_messages }}</span></a>
+		    <a @click.prevent="open(user)" href="#">
+          <font-awesome-icon 
+            v-if="user.is_online"
+            icon="circle" class="text-green"/> {{ user.name }} <span v-if="user.unread_messages > 0" class="badge badge-warning ">{{ user.unread_messages }}</span>
+        </a>
 		  </li>
 		</ul>
   </nav>
@@ -35,7 +39,7 @@
     },
     methods: {
     	open(interlocutor) {
-        this.$store.dispatch('conversation/' + GET_INTERLOCUTOR, interlocutor)
+        this.$store.dispatch('conversation/' + GET_INTERLOCUTOR, interlocutor.id)
     	},
     },
     mounted() {      
@@ -47,15 +51,8 @@
       this.$store.dispatch(GET_USERS)
 
       setInterval(() => {
-        new Promise((resolve) => {
-          this.$store.dispatch('auth/' + CHECK_AUTH)
-          resolve()
-        }).then(() => {
-          if (this.$store.getters['auth/isAuthenticated']) {
-            this.$store.dispatch(GET_USERS)
-          }
-        })
-      }, 5000);
+        this.$store.dispatch(GET_USERS)
+      }, 500);
     }
 	}
 </script>

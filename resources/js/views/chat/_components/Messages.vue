@@ -25,7 +25,7 @@
   import { LocaleMixin } from './../../../mixin/locale.js';
   import {
     GET_MESSAGES,
-    SCROLL_BOTTOM,
+    READ_MESSAGES,
   } from './../../../store/types.js'
 
 	export default {
@@ -33,33 +33,23 @@
     mixins: [LocaleMixin],
     props: ['interlocutor'],
     watch: {
-    	interlocutor(interlocutor) {
-        this.getMessages()
-    	},
-      messages(newMessages, oldMessages) {
-        if (newMessages.length != oldMessages.length) {
-          this.$store.dispatch('conversation/' + SCROLL_BOTTOM)          
-        }
-      }
+    		messages(messages) {
+    			var notReadMessages = _.filter(messages, function(o) { return !o.is_read; });
+
+    			if (notReadMessages.length > 0) {
+    				this.$store.dispatch('conversation/' + READ_MESSAGES)
+    			}
+    		}
     },
-    computed: {    	
+    computed: {     
       messages() {
-      	return this.$store.getters['conversation/messages']
-      }
+        return this.$store.getters['conversation/messages']
+      },
     },
     methods: {
-    	[GET_MESSAGES]() {
-      	if (this.interlocutor) {
-    			this.$store.dispatch('conversation/' + GET_MESSAGES)
-      	}    		
-    	}
     },
     mounted() {
-    	this.getMessages()
 
-      setInterval(() => {
-    		this.getMessages()
-      }, 1000);
     }
 	}
 </script>

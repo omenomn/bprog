@@ -8,6 +8,11 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+window.toastr = require('toastr');
+
+toastr.options.closeButton = true;
+toastr.options.closeDuration = 10;
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAlignLeft } from '@fortawesome/free-solid-svg-icons'
 import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
@@ -15,6 +20,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { faShareSquare } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faAlignLeft)
@@ -23,6 +29,7 @@ library.add(faSignOutAlt)
 library.add(faShareSquare)
 library.add(faArrowLeft)
 library.add(faSpinner)
+library.add(faCircle)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

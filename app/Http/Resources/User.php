@@ -20,6 +20,8 @@ class User extends JsonResource
             'name' => $this->name,
             'unread_messages' => $this->unread_messages,
             'last_message' => ($this->last_message) ? Carbon::parse($this->last_message)->timestamp : 0,
+            'messages' => new MessageCollection($this->all_messages),
+            'is_online' => $this->is_online,
         ];
     }
 }

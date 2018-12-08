@@ -15,9 +15,10 @@ use Illuminate\Http\Request;
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('user', 'Auth\LoginController@getAuthenticatedUser');
-	Route::get('users', 'UsersController@list');
+	Route::get('users-with-messages', 'ChatController@usersWithMessages');
+	Route::patch('online', 'ChatController@onlineUpdate');
 	Route::post('interlocutor/{interlocutor}/messages', 'MessagesController@store');
-	Route::get('interlocutor/{interlocutor}/messages', 'MessagesController@list');
+	Route::patch('interlocutor/{interlocutor}/messages/read', 'MessagesController@read');
 });
 
 Route::post('user/login', 'Auth\LoginController@login');

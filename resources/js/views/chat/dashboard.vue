@@ -54,6 +54,7 @@
   import {
     LOGOUT,
     SEND_MESSAGE,
+    ONLINE,
   } from './../../store/types.js'
 
 	export default {
@@ -86,5 +87,11 @@
         })       
       }
     },
+    mounted() {
+      var self = this
+      setInterval(function() { 
+        self.$store.dispatch(ONLINE)
+      }, 5000);
+    }
 	}
 </script>
