@@ -55,7 +55,9 @@
       this.$store.dispatch(GET_USERS)
 
       setInterval(() => {
-        this.$store.dispatch(GET_USERS)
+        this.$store.dispatch(GET_USERS).catch(() => {
+          this.$router.push({name: 'login'})
+        })
       }, 500);
     }
 	}

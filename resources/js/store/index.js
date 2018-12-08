@@ -34,16 +34,20 @@ export default new Vuex.Store({
 	},
 	actions: {
 	  [GET_USERS] ({ commit, state, getters, rootGetters, dispatch  }) {
-      axios.get('/api/users-with-messages')
-        .then(({data}) => {
-      		commit(SET_USERS, data.users)
-        })
-        .catch(({response}) => {
-        	console.log(response)
-        	if (response.status == 403) {
-        		dispatch('auth/' + LOGOUT)
-        	}
-        })
+	  	return new Promise((resolve, reject) => {
+	      axios.get('/api/users-with-messages')
+	        .then(({data}) => {
+	      		commit(SET_USERS, data.users)
+	      		resolve()
+	        })
+	        .catch(({response}) => {
+	        	console.log(response)
+	        	if (response.status == 403) {
+	        		dispatch('auth/' + LOGOUT)
+	        		reject()
+	        	}
+	        })
+      })
 	  },
 	  [ONLINE] (context) {
       axios.post('/api/online', {
