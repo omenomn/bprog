@@ -4,6 +4,7 @@
     <div class="container-fluid">      
           <users-sidebar-toggle></users-sidebar-toggle>
       <div 
+        v-if="interlocutor"
         class="row mb-0">
         <div class="col-md-12 pl-0 pr-0">
           <div class="input-group mb-0">
