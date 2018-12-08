@@ -5,7 +5,7 @@
         <font-awesome-icon 
           icon="arrow-left"/>
       </div>
-		  <h3>{{ lang.get('messages.users').capitalize() }}</h3>
+		  <h3 v-if="user">{{ user.name.capitalize() }}</h3>
 		</div>
 		<ul class="list-unstyled components text-white">
 		  <li v-for="(user, index) in users">
@@ -26,9 +26,12 @@
 		name: 'users-sidebar',
     mixins: [LocaleMixin],
     computed: {
-    	users() {
-        return _.orderBy(this.$store.getters['users'], ['last_message'], ['desc'])
-    	}
+      users() {
+        return _.orderBy(this.$store.getters['users'], ['last_message'], ['asc'])
+      },
+    	user() {
+        return this.$store.getters['auth/currentUser']
+    	},
     },
     methods: {
     	open(interlocutor) {

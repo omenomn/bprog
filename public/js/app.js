@@ -56892,7 +56892,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* 51 */
 /***/ (function(module, exports) {
 
-module.exports = {"login":"login","login_form":"login form","email":"email","password":"password","users":"users","logout":"logout","message":"message","send":"send","name":"name","chat_with":"chat with","select_interlocutor":"Select interlocutor","access_denied":"access denied"};
+module.exports = {"login":"login","login_form":"login form","email":"email","password":"password","users":"users","logout":"logout","message":"message","send":"send","name":"name","chat_with":"chat with","select_interlocutor":"Select interlocutor","access_denied":"access denied","page_not_found":"page not found","message_sent":"message sent"};
 
 /***/ }),
 /* 52 */
@@ -56912,7 +56912,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var state = {
   errors: [],
   pending: false,
-  user: {},
+  user: null,
   isAuthenticated: !!__WEBPACK_IMPORTED_MODULE_0__common_jwt_service__["a" /* default */].getToken()
 };
 
@@ -57049,15 +57049,15 @@ var actions = (_actions = {}, _defineProperty(_actions, __WEBPACK_IMPORTED_MODUL
       getters = _ref3.getters,
       rootGetters = _ref3.rootGetters;
 
-  console.log(message);
-  // return axios.post('/api/interlocutor/' + getters.interlocutor.id + '/messages', {
-  //     message: message,
-  //   })
-  //   .then(({data}) => {
-  //   })
-  //   .catch(({response}) => {
-  //     context.commit(SET_ERRORS, response.data.errors)
-  //   })
+  return axios.post('/api/interlocutor/' + getters.interlocutor.id + '/messages', {
+    message: message
+  }).then(function (_ref4) {
+    var data = _ref4.data;
+  }).catch(function (_ref5) {
+    var response = _ref5.response;
+
+    context.commit(SET_ERRORS, response.data.errors);
+  });
 }), _actions);
 
 var mutations = _defineProperty({}, __WEBPACK_IMPORTED_MODULE_1__types_js__["m" /* SET_INTERLOCUTOR */], function (state, interlocutor) {
@@ -58193,7 +58193,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_locale_js__["a" /* LocaleMixin */]],
   computed: {
     users: function users() {
-      return _.orderBy(this.$store.getters['users'], ['last_message'], ['desc']);
+      return _.orderBy(this.$store.getters['users'], ['last_message'], ['asc']);
+    },
+    user: function user() {
+      return this.$store.getters['auth/currentUser'];
     }
   },
   methods: {
@@ -58241,7 +58244,9 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("h3", [_vm._v(_vm._s(_vm.lang.get("messages.users").capitalize()))])
+      _vm.user
+        ? _c("h3", [_vm._v(_vm._s(_vm.user.name.capitalize()))])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c(

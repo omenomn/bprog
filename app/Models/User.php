@@ -6,6 +6,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -35,5 +36,16 @@ class User extends Authenticatable
     public function sentMessages()
     {
       return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function scopeForSidebar($query, $userId)
+    {
+        return $query->where('id', '<>', $userId)
+            ->select(
+                'id',
+                'name',
+                DB::raw('(select count(*) from messages where messages.recipient_id=' . $userId . ' and messages.sender_id=users.id and messages.is_read=0) as unread_messages'),
+                DB::raw('(select max(ms.created_at) from messages as ms where ms.recipient_id=' . $userId . '  and ms.sender_id=users.id) as last_message')
+            );
     }
 }

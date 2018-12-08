@@ -49,6 +49,8 @@ class Handler extends ExceptionHandler
         if ($exception instanceof \Throwable) {
             return response()->json([
                 'msg' => $exception->getMessage(),
+                'line' => $exception->getLine(),
+                'file' => $exception->getFile(),
             ], 500);
         }
 

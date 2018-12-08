@@ -28,15 +28,14 @@ const actions = {
     commit(SET_INTERLOCUTOR, interlocutor)
   },
   [SEND_MESSAGE] ({ commit, state, getters, rootGetters }, message) {
-    console.log(message)
-    // return axios.post('/api/interlocutor/' + getters.interlocutor.id + '/messages', {
-    //     message: message,
-    //   })
-    //   .then(({data}) => {
-    //   })
-    //   .catch(({response}) => {
-    //     context.commit(SET_ERRORS, response.data.errors)
-    //   })
+    return axios.post('/api/interlocutor/' + getters.interlocutor.id + '/messages', {
+        message: message,
+      })
+      .then(({data}) => {
+      })
+      .catch(({response}) => {
+        context.commit(SET_ERRORS, response.data.errors)
+      })
   },
 }
 

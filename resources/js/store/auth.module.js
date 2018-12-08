@@ -15,7 +15,7 @@ import {
 const state = {
   errors: [],
   pending: false,
-  user: {},
+  user: null,
   isAuthenticated: !!JwtService.getToken()
 }
 
