@@ -14,12 +14,8 @@
           </button>
         </div>
       </nav>
-      <div class="row mb-0">
-        <div class="col-md-12 pl-0 pr-0">
           <messages 
             :interlocutor="interlocutor"></messages>  
-        </div>  
-      </div>
             <input 
               v-on:keyup.enter="send(message)"
               v-model="message"
