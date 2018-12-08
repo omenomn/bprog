@@ -19,7 +19,7 @@ class User extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'unread_messages' => $this->unread_messages,
-            'last_message' => Carbon::parse($this->last_message)->timestamp,
+            'last_message' => ($this->last_message) ? Carbon::parse($this->last_message)->timestamp : 0,
         ];
     }
 }

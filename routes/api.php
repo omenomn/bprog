@@ -17,6 +17,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('user', 'Auth\LoginController@getAuthenticatedUser');
 	Route::get('users', 'UsersController@list');
 	Route::post('interlocutor/{interlocutor}/messages', 'MessagesController@store');
+	Route::get('interlocutor/{interlocutor}/messages', 'MessagesController@list');
 });
 
 Route::post('user/login', 'Auth\LoginController@login');

@@ -15,4 +15,5 @@ return [
 	'access_denied' => 'access denied',
 	'page_not_found' => 'page not found',
 	'message_sent' => 'message sent',
+	'no_messages' => 'no messages',
 ];

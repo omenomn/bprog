@@ -380,19 +380,21 @@ module.exports = {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return PENDING_TOGGLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return PURGE_ERRORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_ERRORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SET_AUTH; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return SET_AUTH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return SET_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return PURGE_AUTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CHECK_AUTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return LOGOUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return LOGIN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return GET_USERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return SET_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return GET_MESSAGES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return GET_INTERLOCUTOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return SET_INTERLOCUTOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SEND_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return SET_INTERLOCUTOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return SEND_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return SET_MESSAGES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return SCROLL_BOTTOM; });
 var PENDING_TOGGLE = 'pendingToggle';
 var PURGE_ERRORS = 'purgeErrors';
 var SET_ERRORS = 'setErrors';
@@ -408,6 +410,8 @@ var GET_MESSAGES = 'getMessages';
 var GET_INTERLOCUTOR = 'getInterlocutor';
 var SET_INTERLOCUTOR = 'setInterlocutor';
 var SEND_MESSAGE = 'sendMessage';
+var SET_MESSAGES = 'setMessages';
+var SCROLL_BOTTOM = 'scrollBottom';
 
 /***/ }),
 /* 2 */
@@ -56179,14 +56183,14 @@ var lang = new __WEBPACK_IMPORTED_MODULE_2_lang_js___default.a({ messages: __WEB
 				axios.get('/api/users').then(function (_ref) {
 						var data = _ref.data;
 
-						context.commit(__WEBPACK_IMPORTED_MODULE_6__types_js__["o" /* SET_USERS */], data.users);
+						context.commit(__WEBPACK_IMPORTED_MODULE_6__types_js__["q" /* SET_USERS */], data.users);
 				}).catch(function (_ref2) {
 						var response = _ref2.response;
 
 						console.log(response);
 				});
 		}),
-		mutations: _defineProperty({}, __WEBPACK_IMPORTED_MODULE_6__types_js__["o" /* SET_USERS */], function (state, users) {
+		mutations: _defineProperty({}, __WEBPACK_IMPORTED_MODULE_6__types_js__["q" /* SET_USERS */], function (state, users) {
 				state.usersOnline = users;
 		}),
 		modules: {
@@ -56892,7 +56896,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* 51 */
 /***/ (function(module, exports) {
 
-module.exports = {"login":"login","login_form":"login form","email":"email","password":"password","users":"users","logout":"logout","message":"message","send":"send","name":"name","chat_with":"chat with","select_interlocutor":"Select interlocutor","access_denied":"access denied","page_not_found":"page not found","message_sent":"message sent"};
+module.exports = {"login":"login","login_form":"login form","email":"email","password":"password","users":"users","logout":"logout","message":"message","send":"send","name":"name","chat_with":"chat with","select_interlocutor":"Select interlocutor","access_denied":"access denied","page_not_found":"page not found","message_sent":"message sent","no_messages":"no messages"};
 
 /***/ }),
 /* 52 */
@@ -56939,12 +56943,12 @@ var actions = (_actions = {}, _defineProperty(_actions, __WEBPACK_IMPORTED_MODUL
     axios.post('/api/user/login', credentials).then(function (_ref) {
       var data = _ref.data;
 
-      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["k" /* SET_AUTH */], data);
+      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["l" /* SET_AUTH */], data);
       resolve();
     }).catch(function (_ref2) {
       var response = _ref2.response;
 
-      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["l" /* SET_ERRORS */], response.data.errors);
+      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["m" /* SET_ERRORS */], response.data.errors);
     }).then(function () {
       grecaptcha.reset();
       context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["g" /* PENDING_TOGGLE */]);
@@ -56961,7 +56965,7 @@ var actions = (_actions = {}, _defineProperty(_actions, __WEBPACK_IMPORTED_MODUL
     axios.get('/api/user').then(function (_ref3) {
       var data = _ref3.data;
 
-      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["n" /* SET_USER */], data);
+      context.commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["p" /* SET_USER */], data);
     }).catch(function (_ref4) {
       var response = _ref4.response;
 
@@ -56974,14 +56978,14 @@ var actions = (_actions = {}, _defineProperty(_actions, __WEBPACK_IMPORTED_MODUL
 
 var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["g" /* PENDING_TOGGLE */], function (state) {
   state.pending = !state.pending;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["l" /* SET_ERRORS */], function (state, error) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["m" /* SET_ERRORS */], function (state, error) {
   state.errors = error;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["k" /* SET_AUTH */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["l" /* SET_AUTH */], function (state, payload) {
   state.isAuthenticated = true;
   state.user = payload.user;
   state.errors = {};
   __WEBPACK_IMPORTED_MODULE_0__common_jwt_service__["a" /* default */].saveToken(payload.token);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["n" /* SET_USER */], function (state, user) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["p" /* SET_USER */], function (state, user) {
   state.isAuthenticated = true;
   state.user = user;
   state.errors = {};
@@ -57009,7 +57013,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_jwt_service__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__types_js__ = __webpack_require__(1);
-var _actions;
+var _actions, _mutations;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -57031,38 +57035,60 @@ var getters = {
   }
 };
 
-var actions = (_actions = {}, _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["c" /* GET_MESSAGES */], function (_ref, interlocutor) {
+var actions = (_actions = {}, _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["c" /* GET_MESSAGES */], function (_ref) {
   var commit = _ref.commit,
       state = _ref.state,
       getters = _ref.getters,
-      rootGetters = _ref.rootGetters;
-}), _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["b" /* GET_INTERLOCUTOR */], function (_ref2, interlocutor) {
-  var commit = _ref2.commit,
-      state = _ref2.state,
-      getters = _ref2.getters,
-      rootGetters = _ref2.rootGetters;
+      rootGetters = _ref.rootGetters,
+      dispatch = _ref.dispatch;
 
-  commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["m" /* SET_INTERLOCUTOR */], interlocutor);
-}), _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["j" /* SEND_MESSAGE */], function (_ref3, message) {
-  var commit = _ref3.commit,
-      state = _ref3.state,
-      getters = _ref3.getters,
-      rootGetters = _ref3.rootGetters;
+  return axios.get('/api/interlocutor/' + getters.interlocutor.id + '/messages').then(function (_ref2) {
+    var data = _ref2.data;
+
+    commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["o" /* SET_MESSAGES */], data.messages);
+  }).catch(function (_ref3) {
+    var response = _ref3.response;
+
+    console.log(response);
+    //commit(SET_ERRORS, response.data.errors)
+  });
+}), _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["b" /* GET_INTERLOCUTOR */], function (_ref4, interlocutor) {
+  var commit = _ref4.commit,
+      state = _ref4.state,
+      getters = _ref4.getters,
+      rootGetters = _ref4.rootGetters;
+
+  commit(__WEBPACK_IMPORTED_MODULE_1__types_js__["n" /* SET_INTERLOCUTOR */], interlocutor);
+}), _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["k" /* SEND_MESSAGE */], function (_ref5, message) {
+  var commit = _ref5.commit,
+      state = _ref5.state,
+      getters = _ref5.getters,
+      rootGetters = _ref5.rootGetters,
+      dispatch = _ref5.dispatch;
 
   return axios.post('/api/interlocutor/' + getters.interlocutor.id + '/messages', {
     message: message
-  }).then(function (_ref4) {
-    var data = _ref4.data;
-  }).catch(function (_ref5) {
-    var response = _ref5.response;
+  }).then(function (_ref6) {
+    var data = _ref6.data;
 
-    context.commit(SET_ERRORS, response.data.errors);
+    dispatch(__WEBPACK_IMPORTED_MODULE_1__types_js__["c" /* GET_MESSAGES */]);
+  }).catch(function (_ref7) {
+    var response = _ref7.response;
+
+    commit(SET_ERRORS, response.data.errors);
   });
+}), _defineProperty(_actions, __WEBPACK_IMPORTED_MODULE_1__types_js__["j" /* SCROLL_BOTTOM */], function () {
+  setTimeout(function () {
+    var height = $('#messages-card-body').prop('scrollHeight');
+    $('#messages-card-body').scrollTop(height);
+  }, 100);
 }), _actions);
 
-var mutations = _defineProperty({}, __WEBPACK_IMPORTED_MODULE_1__types_js__["m" /* SET_INTERLOCUTOR */], function (state, interlocutor) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["n" /* SET_INTERLOCUTOR */], function (state, interlocutor) {
   state.interlocutor = interlocutor;
-});
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_1__types_js__["o" /* SET_MESSAGES */], function (state, messages) {
+  state.messages = messages;
+}), _mutations);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   namespaced: true,
@@ -58106,7 +58132,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     send: function send(message) {
       var _this = this;
 
-      this.$store.dispatch('conversation/' + __WEBPACK_IMPORTED_MODULE_4__store_types_js__["j" /* SEND_MESSAGE */], message).then(function () {
+      this.$store.dispatch('conversation/' + __WEBPACK_IMPORTED_MODULE_4__store_types_js__["k" /* SEND_MESSAGE */], message).then(function () {
         _this.message = null;
       });
     }
@@ -58193,7 +58219,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_locale_js__["a" /* LocaleMixin */]],
   computed: {
     users: function users() {
-      return _.orderBy(this.$store.getters['users'], ['last_message'], ['asc']);
+      return _.orderBy(this.$store.getters['users'], ['last_message'], ['desc']);
     },
     user: function user() {
       return this.$store.getters['auth/currentUser'];
@@ -58223,7 +58249,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this.$store.dispatch(__WEBPACK_IMPORTED_MODULE_1__store_types_js__["d" /* GET_USERS */]);
         }
       });
-    }, 3000);
+    }, 5000);
   }
 });
 
@@ -58454,6 +58480,9 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin_locale_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_types_js__ = __webpack_require__(1);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -58477,9 +58506,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
+
 
 
 
@@ -58489,8 +58516,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ['interlocutor'],
   watch: {
     interlocutor: function interlocutor(_interlocutor) {
-      console.log(_interlocutor.id);
+      this.getMessages();
+    },
+    messages: function messages(newMessages, oldMessages) {
+      if (newMessages.length != oldMessages.length) {
+        this.$store.dispatch('conversation/' + __WEBPACK_IMPORTED_MODULE_1__store_types_js__["j" /* SCROLL_BOTTOM */]);
+      }
     }
+  },
+  computed: {
+    messages: function messages() {
+      return this.$store.getters['conversation/messages'];
+    }
+  },
+  methods: _defineProperty({}, __WEBPACK_IMPORTED_MODULE_1__store_types_js__["c" /* GET_MESSAGES */], function () {
+    if (this.interlocutor) {
+      this.$store.dispatch('conversation/' + __WEBPACK_IMPORTED_MODULE_1__store_types_js__["c" /* GET_MESSAGES */]);
+    }
+  }),
+  mounted: function mounted() {
+    var _this = this;
+
+    this.getMessages();
+
+    setInterval(function () {
+      _this.getMessages();
+    }, 1000);
   }
 });
 
@@ -58519,111 +58570,31 @@ var render = function() {
           )
         ]),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _vm.interlocutor
-        ? _c("ul", { staticClass: "messages-list-group" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
-            _vm._m(4),
-            _vm._v(" "),
-            _vm._m(5),
-            _vm._v(" "),
-            _vm._m(6),
-            _vm._v(" "),
-            _vm._m(7)
-          ])
-        : _vm._e()
-    ])
+    _c(
+      "div",
+      { staticClass: "card-body", attrs: { id: "messages-card-body" } },
+      [
+        _vm.interlocutor && _vm.messages.length > 0
+          ? _c(
+              "ul",
+              { staticClass: "messages-list-group" },
+              _vm._l(_vm.messages, function(message, index) {
+                return _c(
+                  "li",
+                  {
+                    staticClass: "messages-list-group-item",
+                    class: [message.css_class]
+                  },
+                  [_c("p", [_vm._v(_vm._s(message.message))])]
+                )
+              })
+            )
+          : _c("div", [_vm._v(_vm._s(_vm.lang.get("messages.no_messages")))])
+      ]
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "messages-list-group-item sent" }, [
-      _c("p", [
-        _vm._v("What are your choices when someone puts a gun to your head?")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "messages-list-group-item replies" }, [
-      _c("p", [
-        _vm._v("What are your choices when someone puts a gun to your head?")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "messages-list-group-item sent" }, [
-      _c("p", [
-        _vm._v("What are your choices when someone puts a gun to your head?")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "messages-list-group-item replies" }, [
-      _c("p", [
-        _vm._v("What are your choices when someone puts a gun to your head?")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "messages-list-group-item sent" }, [
-      _c("p", [
-        _vm._v("What are your choices when someone puts a gun to your head?")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "messages-list-group-item replies" }, [
-      _c("p", [
-        _vm._v("What are your choices when someone puts a gun to your head?")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "messages-list-group-item sent" }, [
-      _c("p", [
-        _vm._v("What are your choices when someone puts a gun to your head?")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "messages-list-group-item replies" }, [
-      _c("p", [
-        _vm._v("What are your choices when someone puts a gun to your head?")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

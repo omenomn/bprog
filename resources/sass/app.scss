@@ -271,12 +271,12 @@ a.article:hover {
   line-height: 130%;
 }
 
-.messages-list-group-item.sent p {
+.messages-list-group-item.replies p {
   background: #435f7a;
   color: #fff;
 }
 
-.messages-list-group-item.replies p {
+.messages-list-group-item.sent p {
   background: #fff;
   color: #435f7a;
   float: right;

@@ -27,7 +27,7 @@
     mixins: [LocaleMixin],
     computed: {
       users() {
-        return _.orderBy(this.$store.getters['users'], ['last_message'], ['asc'])
+        return _.orderBy(this.$store.getters['users'], ['last_message'], ['desc'])
       },
     	user() {
         return this.$store.getters['auth/currentUser']
@@ -55,7 +55,7 @@
             this.$store.dispatch(GET_USERS)
           }
         })
-      }, 3000);
+      }, 5000);
     }
 	}
 </script>
