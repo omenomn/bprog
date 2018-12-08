@@ -26,7 +26,8 @@
         <div class="col-md-12 pl-0 pr-0">
           <div class="input-group mb-0">
             <input 
-              v-on:keyup.enter="send(message)"
+              v-on:keyup.enter="send(text)"
+              v-model="text"
               class="form-control form-control-lg message-input" 
               type="text" 
               :placeholder="lang.get('messages.message').capitalize()">  
@@ -34,7 +35,7 @@
               <button 
                 class="btn btn-outline-secondary" 
                 type="button" 
-                @click="send(message)">
+                @click="send(text)">
                 <font-awesome-icon 
                   icon="share-square"/>
               </button>
@@ -65,7 +66,7 @@
     },
     data() {
       return {
-        message: null,
+        text: null,
       }
     },
     mixins: [LocaleMixin],
