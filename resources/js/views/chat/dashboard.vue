@@ -16,6 +16,16 @@
       </nav>
       <div class="row mb-0">
         <div class="col-md-12 pl-0 pr-0">
+            <input 
+              v-on:keyup.enter="send(message)"
+              v-model="message"
+              class="form-control form-control-lg message-input" 
+              type="text" 
+              :placeholder="lang.get('messages.message').capitalize()">  
+        </div>  
+      </div>
+      <div class="row mb-0">
+        <div class="col-md-12 pl-0 pr-0">
           <messages 
             :interlocutor="interlocutor"></messages>  
         </div>  
@@ -26,8 +36,8 @@
         <div class="col-md-12 pl-0 pr-0">
           <div class="input-group mb-0">
             <input 
-              v-on:keyup.enter="send(text)"
-              v-model="text"
+              v-on:keyup.enter="send(message)"
+              v-model="message"
               class="form-control form-control-lg message-input" 
               type="text" 
               :placeholder="lang.get('messages.message').capitalize()">  
@@ -35,7 +45,7 @@
               <button 
                 class="btn btn-outline-secondary" 
                 type="button" 
-                @click="send(text)">
+                @click="send(message)">
                 <font-awesome-icon 
                   icon="share-square"/>
               </button>
@@ -66,7 +76,7 @@
     },
     data() {
       return {
-        text: null,
+        message: null,
       }
     },
     mixins: [LocaleMixin],
