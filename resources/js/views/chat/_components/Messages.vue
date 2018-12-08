@@ -33,13 +33,13 @@
     mixins: [LocaleMixin],
     props: ['interlocutor'],
     watch: {
-    		messages(messages) {
-    			var notReadMessages = _.filter(messages, function(o) { return !o.is_read; });
+  		messages(messages) {
+  			var notReadMessages = _.filter(messages, function(o) { return !o.is_read; });
 
-    			if (notReadMessages.length > 0) {
-    				this.$store.dispatch('conversation/' + READ_MESSAGES)
-    			}
-    		}
+  			if (notReadMessages.length > 0) {
+  				this.$store.dispatch('conversation/' + READ_MESSAGES)
+  			}
+  		}
     },
     computed: {     
       messages() {

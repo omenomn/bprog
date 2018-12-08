@@ -20,21 +20,13 @@
             :interlocutor="interlocutor"></messages>  
         </div>  
       </div>
-            <input 
-              v-on:keyup.enter="send(message)"
-              v-model="message"
-              class="form-control form-control-lg message-input" 
-              type="text" 
-              :placeholder="lang.get('messages.message').capitalize()">  
-            <div class="input-group-append">
-              <button 
-                class="btn btn-outline-secondary" 
-                type="button" 
-                @click="send(message)">
-                <font-awesome-icon 
-                  icon="share-square"/>
-              </button>
-            </div>
+      <div 
+        class="row mb-0">
+        <div class="col-md-12 pl-0 pr-0">
+          <message-field
+            v-if="interlocutor"></message-field>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -42,6 +34,7 @@
   import UsersSidebar from './_components/UsersSidebar';
   import UsersSidebarToggle from './_components/UsersSidebarToggle';
   import Messages from './_components/Messages';
+  import MessageField from './_components/MessageField';
   import { LocaleMixin } from './../../mixin/locale.js';
   import {
     LOGOUT,
@@ -55,11 +48,7 @@
       UsersSidebar,
     	Messages,
       UsersSidebarToggle,
-    },
-    data() {
-      return {
-        message: null,
-      }
+      MessageField,
     },
     mixins: [LocaleMixin],
     computed: {
@@ -73,11 +62,6 @@
           this.$router.push({name: 'login'})
         )
       },
-      send(message) {
-        this.$store.dispatch('conversation/' + SEND_MESSAGE, message).then(() => {
-          this.message = null
-        })       
-      }
     },
     mounted() {
       var self = this
