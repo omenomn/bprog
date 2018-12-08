@@ -26,10 +26,11 @@
         <div class="col-md-12 pl-0 pr-0">
           <div class="input-group mb-0">
             <input 
+              type="text" 
+              name="message"
               v-on:keyup.enter="send(message)"
               v-model="message"
               class="form-control form-control-lg message-input" 
-              type="text" 
               :placeholder="lang.get('messages.message').capitalize()">  
             <div class="input-group-append">
               <button 
