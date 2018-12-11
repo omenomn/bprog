@@ -13,6 +13,8 @@
 
 //Route::get('date-ranges', 'API\DateRangesController@list');
 
+Route::get('categories/tree', 'API\CategoriesController@tree');
+
 Route::get('/', function () {
     return view('dashboard');
 });
