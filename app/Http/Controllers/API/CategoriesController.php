@@ -4,48 +4,13 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 
 class CategoriesController extends Controller
 {
     public function tree()
     {
-    	$categories = [
-    		[
-    			'id' => 1,
-    			'parent_id' => 3,
-                'place' => 1,
-    		],
-    		[
-    			'id' => 2,
-    			'parent_id' => null,
-                'place' => 2,
-    		],
-            [
-                'id' => 3,
-                'parent_id' => 2,
-                'place' => 0,
-            ],
-            [
-                'id' => 4,
-                'parent_id' => 1,
-                'place' => 0,
-            ],
-            [
-                'id' => 6,
-                'parent_id' => 5,
-                'place' => 0,
-            ],
-            [
-                'id' => 5,
-                'parent_id' => 3,
-                'place' => 0,
-            ],
-    		[
-    			'id' => 8,
-    			'parent_id' => null,
-                'place' => 3,
-    		],
-    	];
+        $categories = Category::get()->toArray();
 
     	$dotTree = [];
 
@@ -75,6 +40,9 @@ class CategoriesController extends Controller
 
             $dotTree[$categoryKey] = $category;
     	}
+
+        dd($dotTree);
+
         $placeDotTree = [];
 
         foreach ($dotTree as $key => $item) {
