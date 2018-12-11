@@ -39,7 +39,6 @@ class CategoriesController extends Controller
             }
         }
 
-        //dd($tree);
         return response()->json([
             'tree' => $tree,
         ]);
