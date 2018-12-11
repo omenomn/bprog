@@ -15,7 +15,7 @@ class CategoriesController extends Controller
         $tree = [];
         $categoriesKeyed = $categories->keyBy('id')->toArray();
 
-        foreach ($categories->toArray() as $category) {
+        foreach ($categoriesKeyed as $category) {
 
             $id = $category['id'];
             $path = $id;
@@ -30,7 +30,7 @@ class CategoriesController extends Controller
 
             array_set($tree, $path, $childCategory);    
 
-            if (strlen($childrenPath) > 5) {
+            if (strlen($childrenPath) > 0) {
                 $childrenPath = trim($childrenPath, '.');
                 $children = array_get($tree, $childrenPath);
                 $children = collect($children)->sortBy('place')->toArray();
@@ -39,6 +39,7 @@ class CategoriesController extends Controller
             }
         }
 
+        //dd($tree);
         return response()->json([
             'tree' => $tree,
         ]);
