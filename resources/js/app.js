@@ -38,6 +38,7 @@ import store from './store/index'
 import App from './App.vue';
 import Login from './views/chat/login.vue';
 import Dashboard from './views/chat/dashboard.vue';
+import DateRanges from './views/date_ranges/index.vue';
 
 import {
   CHECK_AUTH,
@@ -55,6 +56,11 @@ const routes = [
 	  		next('/')
 	  	}
 		}
+	},
+	{
+	  name: 'date-ranges',
+	  path: '/date-ranges', 
+	  component: DateRanges,
 	},
 	{
 	  name: 'dashboard',

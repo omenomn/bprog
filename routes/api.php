@@ -22,3 +22,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('user/login', 'Auth\LoginController@login');
+
+Route::get('date-ranges', 'DateRangesController@list');
+Route::post('date-ranges', 'DateRangesController@store');

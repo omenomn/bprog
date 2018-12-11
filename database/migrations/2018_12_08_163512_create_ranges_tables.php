@@ -15,8 +15,8 @@ class CreateRangesTables extends Migration
     {
         Schema::create('ranges', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('from_date');
-            $table->timestamp('to_date')->nullable();
+            $table->timestamp('date_from');
+            $table->timestamp('date_to')->nullable();
         });
     }
 

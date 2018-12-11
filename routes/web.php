@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('date-ranges', 'API\DateRangesController@list');
+
 Route::get('/', function () {
     return view('dashboard');
 });
