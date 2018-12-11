@@ -21,4 +21,5 @@ return [
 	'date_to' => 'date to',
 	'create_range' => 'create range',
 	'create' => 'create',
+	'range_occupied' => 'range is occupied',
 ];

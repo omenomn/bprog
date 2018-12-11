@@ -13,6 +13,8 @@ class DateRange extends Model
         'date_to',
     ];
 
+    public $timestamps = false;
+
     public function scopeCrossRanges($query, $dateFrom, $dateTo = null)
     {
     	if ($dateTo) {
@@ -32,8 +34,7 @@ class DateRange extends Model
 			$query->whereNull('date_to');
     	}
 
-    	$query
-			->orWhereDate('date_from', '=', $dateFrom)
+    	$query->orWhereDate('date_from', '=', $dateFrom)
 			->orWhereDate('date_to', '=', $dateTo)
 			->orWhereDate('date_to', '=', $dateFrom)
 			->orWhereDate('date_from', '=', $dateTo);
