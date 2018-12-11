@@ -41,11 +41,4 @@ class CategoriesController extends Controller
 
         dd($tree);
     }
-
-    protected function setKey($category)
-    {
-        return ($category['parent_id']) ? 
-            '(' . $category['parent_id'] . ').children.(' . $category['id'] . ')' :  
-            '(' . $category['id'] . ')';
-    }
 }
