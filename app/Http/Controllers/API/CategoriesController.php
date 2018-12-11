@@ -41,8 +41,6 @@ class CategoriesController extends Controller
             $dotTree[$categoryKey] = $category;
     	}
 
-        dd($dotTree);
-
         $placeDotTree = [];
 
         foreach ($dotTree as $key => $item) {
