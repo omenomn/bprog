@@ -10,7 +10,7 @@ class DateRangesController extends Controller
 {
     public function list(Request $request)
     {
-    	$ranges = DateRange::crossRanges('2018-12-10')->get();
+    	$ranges = DateRange::crossRanges('2018-12-03', '2018-12-04')->get();
 
     	dd($ranges);
     }
